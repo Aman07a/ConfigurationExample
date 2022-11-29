@@ -16,8 +16,14 @@ namespace ConfigurationExample.Controllers
 		[Route("/")]
 		public IActionResult Index()
 		{
-			ViewBag.MyKey = _configuration["MyKey"];
-			ViewBag.MyAPIKey = _configuration.GetValue("MyAPIKey", "the default key");
+			// ViewBag.CliendID = _configuration["weatherapi"];
+			// ViewBag.ClientSecret = _configuration.GetValue("weatherapi:ClientSecret", "the default client secret");
+
+			IConfigurationSection weatherapiSection = _configuration.GetSection("weatherapi");
+
+			ViewBag.CliendID = weatherapiSection["ClientID"];
+
+			ViewBag.ClientSecret = weatherapiSection["ClientSecret"];
 
 			return View();
 		}
